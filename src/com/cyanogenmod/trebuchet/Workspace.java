@@ -95,7 +95,7 @@ public class Workspace extends PagedView
     private static float CAMERA_DISTANCE = 6500;
 
     private static final int CHILDREN_OUTLINE_FADE_OUT_DELAY = 0;
-    private static final int CHILDREN_OUTLINE_FADE_OUT_DURATION = 375;
+    private static final int CHILDREN_OUTLINE_FADE_OUT_DURATION = 300;
     private static final int CHILDREN_OUTLINE_FADE_IN_DURATION = 100;
 
     private static final int BACKGROUND_FADE_OUT_DURATION = 350;
@@ -796,9 +796,9 @@ public class Workspace extends PagedView
         }
 
         // Only show page outlines as we pan if we are on large screen
-        if (LauncherApplication.isScreenLarge()) {
+        //if (LauncherApplication.isScreenLarge()) {
             showOutlines();
-        }
+        //}
     }
 
     protected void onPageEndMoving() {
@@ -815,9 +815,9 @@ public class Workspace extends PagedView
         // Hide the outlines, as long as we're not dragging
         if (!mDragController.dragging()) {
             // Only hide page outlines as we pan if we are on large screen
-            if (LauncherApplication.isScreenLarge()) {
+            //if (LauncherApplication.isScreenLarge()) {
                 hideOutlines();
-            }
+            //}
         }
         mOverScrollMaxBackgroundAlpha = 0.0f;
         mOverScrollPageIndex = -1;
@@ -1140,7 +1140,7 @@ public class Workspace extends PagedView
     }
 
     void hideOutlines() {
-        if (!isSmall() && !mIsSwitchingState) {
+        if (!mIsSwitchingState) {
             if (mChildrenOutlineFadeInAnimation != null) mChildrenOutlineFadeInAnimation.cancel();
             if (mChildrenOutlineFadeOutAnimation != null) mChildrenOutlineFadeOutAnimation.cancel();
             mChildrenOutlineFadeOutAnimation = ObjectAnimator.ofFloat(this, "childrenOutlineAlpha", 0.0f);
