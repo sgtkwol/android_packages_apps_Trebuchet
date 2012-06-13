@@ -75,11 +75,11 @@
                     android:summary="@string/preferences_interface_homescreen_scrolling_transition_effect_summary"
                     android:entries="@array/preferences_interface_homescreen_scrolling_transition_effect_entries"
                     android:entryValues="@array/preferences_interface_homescreen_scrolling_transition_effect_values"
-                    android:defaultValue="@string/config_workspaceDefaultTransitionEffect" />
+                    android:defaultValue="@string/config_workspaceDefaultTransitionEffect" />		
                 <CheckBoxPreference android:key="ui_homescreen_scrolling_fade_adjacent_screens"
                     android:title="@string/preferences_interface_homescreen_scrolling_fade_adjacent_screens_title"
                     android:summary="@string/preferences_interface_homescreen_scrolling_fade_adjacent_screens_summary"
-                    android:defaultValue="@bool/config_workspaceDefualtFadeInAdjacentScreens" />
+                    android:defaultValue="@bool/config_workspaceDefaultFadeInAdjacentScreens" />
                 <CheckBoxPreference android:key="ui_homescreen_scrolling_scroll_wallpaper"
                     android:title="@string/preferences_interface_homescreen_scrolling_scroll_wallpaper_title"
                     android:summary="@string/preferences_interface_homescreen_scrolling_scroll_wallpaper_summary"
@@ -144,10 +144,24 @@
         </PreferenceScreen> -->
 
         <!-- Icons -->
-        <!-- <PreferenceScreen android:key="ui_icons"
+        <PreferenceScreen android:key="ui_icons"
             android:title="@string/preferences_interface_icons_title">
-
-        </PreferenceScreen> -->
+            <PreferenceCategory android:key="ui_folder_style"
+                android:title="@string/preferences_interface_icons_folder_category">
+                <ListPreference android:key="ui_icons_folder_background"
+                    android:title="@string/preferences_interface_folder_background"
+                    android:summary="@string/preferences_interface_folder_background_summary"
+                    android:entries="@array/preferences_interface_folder_background_entries"
+                    android:entryValues="@array/preferences_interface_folder_background_values"
+                    android:defaultValue="@string/config_iconsDefaultFolderBackground" />
+                <ListPreference android:key="ui_icons_folder_style"
+                    android:title="@string/preferences_interface_folder_stlye"
+                    android:summary="@string/preferences_interface_folder_stlye_summary"
+                    android:entries="@array/preferences_interface_folder_style_entries"
+                    android:entryValues="@array/preferences_interface_folder_style_values"
+                    android:defaultValue="@string/config_iconsDefaultFolderStyle" />				
+            </PreferenceCategory>
+        </PreferenceScreen>
 
         <!-- General -->
         <PreferenceScreen android:key="ui_general"
@@ -155,6 +169,10 @@
             <CheckBoxPreference android:key="ui_general_orientation"
                 android:title="@string/preferences_interface_general_orientation_title"
                 android:defaultValue="@bool/config_defaultAutoRotate" />
+	        <CheckBoxPreference android:key="ui_general_enable_tablet_effects"
+                    android:title="@string/preferences_interface_general_tablet_effects_title"
+                    android:summary="@string/preferences_interface_general_tablet_effects_summary"
+                    android:defaultValue="@bool/config_workspaceDefaultTabletEffects" />
         </PreferenceScreen>
     </PreferenceCategory>
 

@@ -53,11 +53,11 @@ public class FolderIcon extends LinearLayout implements FolderListener {
     FolderInfo mInfo;
     private static boolean sStaticValuesDirty = true;
 
-    // The number of icons to display in the
-    private static final int NUM_ITEMS_IN_PREVIEW = 3;
+    // The number of icons to display in the folder
     private static final int CONSUMPTION_ANIMATION_DURATION = 100;
     private static final int DROP_IN_ANIMATION_DURATION = 400;
     private static final int INITIAL_ITEM_ANIMATION_DURATION = 350;
+    private static int NUM_ITEMS_IN_PREVIEW = 3;
 
     // The degree to which the inner ring grows when accepting drop
     private static final float INNER_RING_GROWTH_FACTOR = 0.15f;
@@ -72,7 +72,7 @@ public class FolderIcon extends LinearLayout implements FolderListener {
     // (0 means it's not scaled at all, 1 means it's scaled to nothing)
     private static final float PERSPECTIVE_SCALE_FACTOR = 0.35f;
 
-    public static Drawable sSharedFolderLeaveBehind = null;
+    public static Drawable sSharedFolderLeaveBehind = null;	
 
     private ImageView mPreviewBackground;
     private BubbleTextView mFolderName;
@@ -90,15 +90,35 @@ public class FolderIcon extends LinearLayout implements FolderListener {
     private int mPreviewOffsetY;
     private float mMaxPerspectiveShift;
     boolean mAnimating = false;
+    int mFolderStyle = 0;
+	static boolean mFolderBackground = false;
     private PreviewItemDrawingParams mParams = new PreviewItemDrawingParams(0, 0, 0, 0);
     private PreviewItemDrawingParams mAnimParams = new PreviewItemDrawingParams(0, 0, 0, 0);
 
     public FolderIcon(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setupFolderParameters(context);
     }
 
     public FolderIcon(Context context) {
         super(context);
+        setupFolderParameters(context);
+    }
+
+    public void setupFolderParameters(Context context){
+        final Resources res = context.getResources();
+	    mFolderBackground = PreferencesProvider.Interface.Icons.Folder.getFolderBackground(context, 
+		    res.getString(R.string.config_iconsDefaultFolderBackground)) == 0;
+        mFolderStyle = PreferencesProvider.Interface.Icons.Folder.getFolderStyle(context, 
+		    res.getString(R.string.config_iconsDefaultFolderStyle));
+        switch(mFolderStyle){
+            case 0:
+                NUM_ITEMS_IN_PREVIEW = 3;
+            break;
+            case 1:
+                NUM_ITEMS_IN_PREVIEW = 4;
+            break;
+        }
     }
 
     public boolean isDropEnabled() {
@@ -115,7 +135,9 @@ public class FolderIcon extends LinearLayout implements FolderListener {
 
         icon.mFolderName = (BubbleTextView) icon.findViewById(R.id.folder_icon_name);
         icon.mFolderName.setText(folderInfo.title);
-        icon.mPreviewBackground = (ImageView) icon.findViewById(R.id.preview_background);
+    	icon.mPreviewBackground = (ImageView) icon.findViewById(R.id.preview_background);
+		if ( !mFolderBackground )
+			icon.mPreviewBackground.setVisibility( View.INVISIBLE );
 
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
@@ -226,7 +248,7 @@ public class FolderIcon extends LinearLayout implements FolderListener {
                         mCellLayout.hideFolderAccept(FolderRingAnimator.this);
                     }
                     if (mFolderIcon != null) {
-                        mFolderIcon.mPreviewBackground.setVisibility(VISIBLE);
+						mFolderIcon.mPreviewBackground.setVisibility( mFolderBackground ? VISIBLE : INVISIBLE );					
                     }
                 }
             });
@@ -449,20 +471,57 @@ public class FolderIcon extends LinearLayout implements FolderListener {
 
     private PreviewItemDrawingParams computePreviewItemDrawingParams(int index,
             PreviewItemDrawingParams params) {
+        
         index = NUM_ITEMS_IN_PREVIEW - index - 1;
-        float r = (index * 1.0f) / (NUM_ITEMS_IN_PREVIEW - 1);
-        float scale = (1 - PERSPECTIVE_SCALE_FACTOR * (1 - r));
 
-        float offset = (1 - r) * mMaxPerspectiveShift;
-        float scaledSize = scale * mBaselineIconSize;
-        float scaleOffsetCorrection = (1 - scale) * mBaselineIconSize;
+        float transY = 0;
+        float transX = 0;
+        float totalScale = 0;
+        int overlayAlpha = 0;
+        float margin = 0;
 
-        // We want to imagine our coordinates from the bottom left, growing up and to the
-        // right. This is natural for the x-axis, but for the y-axis, we have to invert things.
-        float transY = mAvailableSpaceInPreview - (offset + scaledSize + scaleOffsetCorrection);
-        float transX = offset + scaleOffsetCorrection;
-        float totalScale = mBaselineIconScale * scale;
-        final int overlayAlpha = (int) (80 * (1 - r));
+        switch(mFolderStyle){
+            case 0:
+                float r = (index * 1.0f) / (NUM_ITEMS_IN_PREVIEW - 1);
+                float scale = (1 - PERSPECTIVE_SCALE_FACTOR * (1 - r));
+                float offset = (1 - r) * mMaxPerspectiveShift;
+                float scaledSize = scale * mBaselineIconSize;
+                float scaleOffsetCorrection = (1 - scale) * mBaselineIconSize;
+            
+                // We want to imagine our coordinates from the bottom left, growing up and to the
+                // right. This is natural for the x-axis, but for the y-axis, we have to invert things.
+                transY = mAvailableSpaceInPreview - (offset + scaledSize + scaleOffsetCorrection);
+                transX = offset + scaleOffsetCorrection;
+                totalScale = mBaselineIconScale * scale;
+                overlayAlpha = (int) (80 * (1 - r));
+            break;
+	    case 1:
+                totalScale = mBaselineIconScale * (float)0.6;
+	        	overlayAlpha = 0;
+                transY = 0;
+                transX = 0;
+                margin = mIntrinsicIconSize * (float)0.1;
+
+                switch(index){
+                     case 0:		
+	                	transY = 0;
+                        transX = 0;		
+                     break;
+                     case 1:
+		        transY = 0;
+                        transX = margin + mIntrinsicIconSize * (float) 0.5;
+                     break;
+                     case 2:
+                        transY = margin + mIntrinsicIconSize * (float)0.5;
+                        transX = margin + mIntrinsicIconSize * (float)0.5;
+                     break;
+                     case 3:
+	    	        	transY = margin + mIntrinsicIconSize * (float)0.5;
+                        transX = 0;
+                        break;
+                }
+            break;
+        }
 
         if (params == null) {
             params = new PreviewItemDrawingParams(transX, transY, totalScale, overlayAlpha);

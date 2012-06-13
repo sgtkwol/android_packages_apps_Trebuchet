@@ -62,4 +62,20 @@
         <item>CubeOut</item>
         <item>Stack</item>
     </string-array>
+    <string-array name="preferences_interface_folder_style_entries">
+        <item>@string/preferences_interface_folder_stlye_default</item>
+        <item>@string/preferences_interface_folder_stlye_grid</item>
+    </string-array>
+    <string-array name="preferences_interface_folder_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="preferences_interface_folder_background_entries">
+        <item>@string/preferences_interface_folder_background_default</item>
+        <item>@string/preferences_interface_folder_background_none</item>
+    </string-array>
+    <string-array name="preferences_interface_folder_background_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
