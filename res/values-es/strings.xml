@@ -177,9 +177,22 @@
 
     <!-- Icons -->
     <string name="preferences_interface_icons_title">"Iconos"</string>
+    <string name="preferences_interface_icons_folder_category">Carpetas</string>
+
+    <string name="preferences_interface_folder_stlye">Estilo de las carpetas</string>
+    <string name="preferences_interface_folder_stlye_summary">Estilo de las carpetas en la pantalla de inicio</string>
+    <string name="preferences_interface_folder_stlye_default">Por defecto</string>
+    <string name="preferences_interface_folder_stlye_grid">Cuadrícula</string>
+
+    <string name="preferences_interface_folder_background">Fondo de las carpetas</string>
+    <string name="preferences_interface_folder_background_summary">Fondo de las carpetas en la pantalla de inicio</string>
+    <string name="preferences_interface_folder_background_default">Por defecto</string>
+    <string name="preferences_interface_folder_background_none">Ninguno</string>
 
     <!-- General -->
     <string name="preferences_interface_general_title">"General"</string>
     <string name="preferences_interface_general_orientation_title">"Rotación automática pantalla"</string>
+	<string name="preferences_interface_general_tablet_effects_title">Efectos de táblet</string>
+    <string name="preferences_interface_general_tablet_effects_summary">Mostrar efectos e interfaz al estilo táblet</string>
 
 </resources>
