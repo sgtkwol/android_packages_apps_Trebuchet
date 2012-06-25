@@ -27,23 +27,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- AppsCustomize icon -->
+        <!-- Settings icon -->
         <com.cyanogenmod.trebuchet.HolographicImageView
-            android:id="@+id/all_apps_button"
-            android:onClick="onClickAllAppsButton"
+            android:id="@+id/settings_button"
+            android:onClick="onClickSettingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:paddingLeft="@dimen/toolbar_button_horizontal_padding"
-            android:paddingRight="4dip"
-            android:paddingTop="4dip"
+            android:paddingTop="10dip"
             android:paddingBottom="4dip"
-            android:src="@drawable/ic_home_all_apps_holo_dark"
-
+            android:src="@drawable/ic_menu_overflow"
             android:focusable="true"
-            android:clickable="true"
-            android:contentDescription="@string/accessibility_all_apps_button" />
+            android:clickable="true"/>
+
+        <!-- Rocket icon -->
+        <com.cyanogenmod.trebuchet.HolographicImageView
+            android:id="@+id/rocket_button"
+            android:onClick="onClickRocketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/settings_button"
+            android:paddingTop="10dip"
+            android:paddingBottom="4dip"
+            android:src="@drawable/ic_home_rocket_holo_dark"
+            android:focusable="true"
+            android:clickable="true"/>
+
     </RelativeLayout>
 
     <!-- Global Tablet search icon -->
