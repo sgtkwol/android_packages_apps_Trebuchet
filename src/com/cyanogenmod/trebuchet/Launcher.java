@@ -1817,6 +1817,22 @@ public final class Launcher extends Activity
         showAllApps(true);
     }
 
+    public void onClickSettingsButton(View v) {
+        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+        Intent intent = new Intent().setClassName("com.cyanogenmod.trebuchet",
+            "com.cyanogenmod.trebuchet.preference.Preferences");
+        startActivity(intent);
+    }
+
+    public void onClickRocketButton(View v) {
+        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+        Intent intent = new Intent().setClassName("com.cyanogenmod.trebuchet",
+            "com.cyanogenmod.trebuchet.RocketLauncher");
+        startActivity(intent);
+    }
+
     public void onTouchDownAllAppsButton(View v) {
         // Provide the same haptic feedback that the system offers for virtual keys.
         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
