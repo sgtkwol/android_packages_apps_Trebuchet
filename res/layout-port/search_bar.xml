@@ -18,50 +18,82 @@
     xmlns:launcher="http://schemas.android.com/apk/res/com.cyanogenmod.trebuchet"
     style="@style/SearchDropTargetBar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/search_bar_height"
-    android:layout_gravity="bottom|center_horizontal"
-    android:background="@drawable/search_frame">
-   <!-- Global search icon -->
-   <com.cyanogenmod.trebuchet.HolographicLinearLayout
-        style="@style/SearchButton"
-        launcher:sourceImageViewId="@+id/search_button"
-        android:id="@+id/search_button_container"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:launcher="http://schemas.android.com/apk/res/com.cyanogenmod.trebuchet"
+        style="@style/SearchDropTargetBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Settings icon -->
+        <com.cyanogenmod.trebuchet.HolographicImageView
+            android:id="@+id/settings_button"
+            android:onClick="onClickSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingTop="10dip"
+            android:paddingBottom="4dip"
+            android:src="@drawable/ic_menu_overflow"
+            android:focusable="true"
+            android:clickable="true"/>
+
+        <!-- Rocket icon -->
+        <com.cyanogenmod.trebuchet.HolographicImageView
+            android:id="@+id/rocket_button"
+            android:onClick="onClickRocketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/settings_button"
+            android:paddingTop="10dip"
+            android:paddingBottom="4dip"
+            android:src="@drawable/ic_home_rocket_holo_dark"
+            android:focusable="true"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+
+    <!-- Global Tablet search icon -->
+   <com.cyanogenmod.trebuchet.HolographicImageView
+        style="@style/SearchButton"
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/voice_button_container"
+        android:src="@drawable/ic_home_search_normal_holo"
         android:onClick="onClickSearchButton"
         android:focusable="true"
         android:clickable="true"
-        android:contentDescription="@string/accessibility_search_button">
-       <ImageView
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_home_search_normal_holo"
-            android:adjustViewBounds="true" />
-    </com.cyanogenmod.trebuchet.HolographicLinearLayout>
+        android:paddingTop="10dip"
+        android:paddingBottom="4dip"
+        android:contentDescription="@string/accessibility_search_button" />
 
-    <!-- Voice search icon -->
-    <com.cyanogenmod.trebuchet.HolographicLinearLayout
+    <ImageView
+        style="@style/SearchButtonDivider"
+        android:id="@+id/search_divider"
+        android:layout_toRightOf="@+id/search_button"
+        android:src="@drawable/divider_launcher_holo"
+        android:onClick="onClickSearchButton"
+        android:focusable="false"
+        android:clickable="true" />
+
+    <!-- Voice Tablet search icon -->
+    <com.cyanogenmod.trebuchet.HolographicImageView
         style="@style/SearchButton.Voice"
-        launcher:sourceImageViewId="@+id/voice_button"
-        android:id="@+id/voice_button_container"
-        android:layout_width="@dimen/search_bar_height"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:gravity="right"
+        android:id="@+id/voice_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/search_divider"
+        android:src="@drawable/ic_home_voice_search_holo"
         android:onClick="onClickVoiceButton"
         android:focusable="true"
         android:clickable="true"
-        android:contentDescription="@string/accessibility_voice_search_button">
-        <ImageView
-            android:id="@+id/voice_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_home_voice_search_holo"
-            android:adjustViewBounds="true" />
-    </com.cyanogenmod.trebuchet.HolographicLinearLayout>
+        android:paddingTop="10dip"
+        android:paddingBottom="4dip"
+        android:contentDescription="@string/accessibility_voice_search_button"/>
+
 </RelativeLayout>

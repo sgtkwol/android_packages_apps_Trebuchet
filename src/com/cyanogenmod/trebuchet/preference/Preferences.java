@@ -49,6 +49,7 @@ public class Preferences extends PreferenceActivity {
             homescreen.removePreference(findPreference("ui_homescreen_screen_padding_vertical"));
             homescreen.removePreference(findPreference("ui_homescreen_screen_padding_horizontal"));
             homescreen.removePreference(findPreference("ui_homescreen_indicator"));
+            homescreen.removePreference(findPreference("ui_general_enable_tablet_effects"));
 
             PreferenceGroup drawer = (PreferenceGroup) findPreference("ui_drawer");
             drawer.removePreference(findPreference("ui_drawer_indicator"));

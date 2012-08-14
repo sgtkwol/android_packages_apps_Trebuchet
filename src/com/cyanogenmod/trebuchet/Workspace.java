@@ -265,6 +265,7 @@ public class Workspace extends PagedView
     private boolean mFadeScrollingIndicator;
     private boolean mShowDockDivider;
     private TransitionEffect mTransitionEffect;
+    private boolean mTabletEffects;
 
     /**
      * Used to inflate the Workspace from XML.
@@ -340,12 +341,14 @@ public class Workspace extends PagedView
         mHideIconLabels = PreferencesProvider.Interface.Homescreen.getHideIconLabels(context);
         mScrollWallpaper = PreferencesProvider.Interface.Homescreen.Scrolling.getScrollWallpaper(context);
         mTransitionEffect = PreferencesProvider.Interface.Homescreen.Scrolling.getTransitionEffect(context,
-                res.getString(R.string.config_workspaceDefaultTransitionEffect));
+            res.getString(R.string.config_workspaceDefaultTransitionEffect));
         mFadeInAdjacentScreens = PreferencesProvider.Interface.Homescreen.Scrolling.getFadeInAdjacentScreens(context,
-                res.getBoolean(R.bool.config_workspaceDefualtFadeInAdjacentScreens));
+            res.getBoolean(R.bool.config_workspaceDefaultFadeInAdjacentScreens));
         mShowScrollingIndicator = PreferencesProvider.Interface.Homescreen.Indicator.getShowScrollingIndicator(context);
         mFadeScrollingIndicator = PreferencesProvider.Interface.Homescreen.Indicator.getFadeScrollingIndicator(context);
         mShowDockDivider = PreferencesProvider.Interface.Homescreen.Indicator.getShowDockDivider(context);
+        mTabletEffects = PreferencesProvider.Interface.General.getTabletEffects(context, 
+		    res.getBoolean(R.bool.config_workspaceDefaultTabletEffects));
 
         mLauncher = (Launcher) context;
         initWorkspace();
@@ -796,7 +799,7 @@ public class Workspace extends PagedView
         }
 
         // Only show page outlines as we pan if we are on large screen
-        if (LauncherApplication.isScreenLarge()) {
+        if (LauncherApplication.isScreenLarge() || mTabletEffects) {
             showOutlines();
         }
     }
@@ -815,7 +818,7 @@ public class Workspace extends PagedView
         // Hide the outlines, as long as we're not dragging
         if (!mDragController.dragging()) {
             // Only hide page outlines as we pan if we are on large screen
-            if (LauncherApplication.isScreenLarge()) {
+            if (LauncherApplication.isScreenLarge() || mTabletEffects) {
                 hideOutlines();
             }
         }
@@ -1130,7 +1133,7 @@ public class Workspace extends PagedView
     }
 
     void showOutlines() {
-        if (!isSmall() && !mIsSwitchingState) {
+        if ((!isSmall() || mTabletEffects) && !mIsSwitchingState) {
             if (mChildrenOutlineFadeOutAnimation != null) mChildrenOutlineFadeOutAnimation.cancel();
             if (mChildrenOutlineFadeInAnimation != null) mChildrenOutlineFadeInAnimation.cancel();
             mChildrenOutlineFadeInAnimation = ObjectAnimator.ofFloat(this, "childrenOutlineAlpha", 1.0f);
@@ -1140,7 +1143,7 @@ public class Workspace extends PagedView
     }
 
     void hideOutlines() {
-        if (!isSmall() && !mIsSwitchingState) {
+        if ((!isSmall() || mTabletEffects) && !mIsSwitchingState) {
             if (mChildrenOutlineFadeInAnimation != null) mChildrenOutlineFadeInAnimation.cancel();
             if (mChildrenOutlineFadeOutAnimation != null) mChildrenOutlineFadeOutAnimation.cancel();
             mChildrenOutlineFadeOutAnimation = ObjectAnimator.ofFloat(this, "childrenOutlineAlpha", 0.0f);

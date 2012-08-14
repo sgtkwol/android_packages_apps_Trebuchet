@@ -1817,6 +1817,22 @@ public final class Launcher extends Activity
         showAllApps(true);
     }
 
+    public void onClickSettingsButton(View v) {
+        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+        Intent intent = new Intent().setClassName("com.cyanogenmod.trebuchet",
+            "com.cyanogenmod.trebuchet.preference.Preferences");
+        startActivity(intent);
+    }
+
+    public void onClickRocketButton(View v) {
+        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+        Intent intent = new Intent().setClassName("com.cyanogenmod.trebuchet",
+            "com.cyanogenmod.trebuchet.RocketLauncher");
+        startActivity(intent);
+    }
+
     public void onTouchDownAllAppsButton(View v) {
         // Provide the same haptic feedback that the system offers for virtual keys.
         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
@@ -2841,10 +2857,8 @@ public final class Launcher extends Activity
     }
 
     private boolean updateGlobalSearchIcon() {
-        final View searchButtonContainer = findViewById(R.id.search_button_container);
         final ImageView searchButton = (ImageView) findViewById(R.id.search_button);
         final View searchDivider = findViewById(R.id.search_divider);
-        final View voiceButtonContainer = findViewById(R.id.voice_button_container);
         final View voiceButton = findViewById(R.id.voice_button);
 
         final SearchManager searchManager =
@@ -2855,15 +2869,11 @@ public final class Launcher extends Activity
             sGlobalSearchIcon[coi] = updateButtonWithIconFromExternalActivity(
                     R.id.search_button, activityName, R.drawable.ic_home_search_normal_holo);
             if (searchDivider != null) searchDivider.setVisibility(View.VISIBLE);
-            if (searchButtonContainer != null) searchButtonContainer.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.VISIBLE);
-            invalidatePressedFocusedStates(searchButtonContainer, searchButton);
             return true;
         } else {
             // We disable both search and voice search when there is no global search provider
             if (searchDivider != null) searchDivider.setVisibility(View.GONE);
-            if (searchButtonContainer != null) searchButtonContainer.setVisibility(View.GONE);
-            if (voiceButtonContainer != null) voiceButtonContainer.setVisibility(View.GONE);
             searchButton.setVisibility(View.GONE);
             voiceButton.setVisibility(View.GONE);
             return false;
@@ -2871,15 +2881,12 @@ public final class Launcher extends Activity
     }
 
     private void updateGlobalSearchIcon(Drawable.ConstantState d) {
-        final View searchButtonContainer = findViewById(R.id.search_button_container);
         final View searchButton = (ImageView) findViewById(R.id.search_button);
         updateButtonWithDrawable(R.id.search_button, d);
-        invalidatePressedFocusedStates(searchButtonContainer, searchButton);
     }
 
     private boolean updateVoiceSearchIcon(boolean searchVisible) {
         final View searchDivider = findViewById(R.id.search_divider);
-        final View voiceButtonContainer = findViewById(R.id.voice_button_container);
         final View voiceButton = findViewById(R.id.voice_button);
 
         // We only show/update the voice search icon if the search icon is enabled as well
@@ -2890,23 +2897,18 @@ public final class Launcher extends Activity
             sVoiceSearchIcon[coi] = updateButtonWithIconFromExternalActivity(
                     R.id.voice_button, activityName, R.drawable.ic_home_voice_search_holo);
             if (searchDivider != null) searchDivider.setVisibility(View.VISIBLE);
-            if (voiceButtonContainer != null) voiceButtonContainer.setVisibility(View.VISIBLE);
             voiceButton.setVisibility(View.VISIBLE);
-            invalidatePressedFocusedStates(voiceButtonContainer, voiceButton);
             return true;
         } else {
             if (searchDivider != null) searchDivider.setVisibility(View.GONE);
-            if (voiceButtonContainer != null) voiceButtonContainer.setVisibility(View.GONE);
             voiceButton.setVisibility(View.GONE);
             return false;
         }
     }
 
     private void updateVoiceSearchIcon(Drawable.ConstantState d) {
-        final View voiceButtonContainer = findViewById(R.id.voice_button_container);
         final View voiceButton = findViewById(R.id.voice_button);
         updateButtonWithDrawable(R.id.voice_button, d);
-        invalidatePressedFocusedStates(voiceButtonContainer, voiceButton);
     }
 
     /**

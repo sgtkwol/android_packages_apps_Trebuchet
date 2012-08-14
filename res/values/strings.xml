@@ -341,9 +341,22 @@ s -->
 
     <!-- Icons -->
     <string name="preferences_interface_icons_title">Icons</string>
+    <string name="preferences_interface_icons_folder_category">Folders</string>
+
+    <string name="preferences_interface_folder_stlye">Folder Style</string>
+    <string name="preferences_interface_folder_stlye_summary">Style of the folders on homescreen</string>
+    <string name="preferences_interface_folder_stlye_default">Default</string>
+    <string name="preferences_interface_folder_stlye_grid">Grid</string>
+
+    <string name="preferences_interface_folder_background">Folder Background</string>
+    <string name="preferences_interface_folder_background_summary">Background of the folders on homescreen</string>
+    <string name="preferences_interface_folder_background_default">Default</string>
+    <string name="preferences_interface_folder_background_none">None</string>
 
     <!-- General -->
     <string name="preferences_interface_general_title">General</string>
     <string name="preferences_interface_general_orientation_title">Auto-rotate screen</string>
+    <string name="preferences_interface_general_tablet_effects_title">Tablet effects</string>
+    <string name="preferences_interface_general_tablet_effects_summary">Shows tablet layout and effects</string>
 
 </resources>

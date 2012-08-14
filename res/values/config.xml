@@ -48,9 +48,11 @@
     <!-- Whether or not the drop targets drop down as opposed to fade in -->
     <bool name="config_useDropTargetDownTransition">true</bool>
     <!-- Which default transition effect to use on the workspace -->
-    <string name="config_workspaceDefaultTransitionEffect">Standard</string>
+    <string name="config_workspaceDefaultTransitionEffect">RotateDown</string>
+    <!-- Whether to use tablet GFX effects -->
+    <bool name="config_workspaceDefaultTabletEffects">true</bool>
     <!-- Whether to fade the adjacent screens when scrolling -->
-    <bool name="config_workspaceDefualtFadeInAdjacentScreens">false</bool>
+    <bool name="config_workspaceDefaultFadeInAdjacentScreens">false</bool>
 
     <!-- The transition duration for the background of the drop targets -->
     <integer name="config_dropTargetBgTransitionDuration">100</integer>
@@ -97,4 +99,9 @@
     <!-- Workspace grid size -->
     <integer name="config_workspaceRows">4</integer>
     <integer name="config_workspaceColumns">4</integer>
+
+    <!-- Default folder style -->
+    <string name="config_iconsDefaultFolderBackground">1</string>
+    <string name="config_iconsDefaultFolderStyle">1</string>
+    
 </resources>
