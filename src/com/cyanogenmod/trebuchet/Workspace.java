@@ -594,19 +594,9 @@ public class Workspace extends SmoothPagedView
             layout = mLauncher.getHotseat().getLayout();
             child.setOnKeyListener(null);
 
-<<<<<<< HEAD
-            if (!mHideIconLabels) {
-                // Hide titles in the hotseat
-                if (child instanceof FolderIcon) {
-                    ((FolderIcon) child).setTextVisible(false);
-                } else if (child instanceof BubbleTextView) {
-                    ((BubbleTextView) child).setTextVisible(false);
-                }
-=======
             // Hide folder title in the hotseat
             if (child instanceof FolderIcon) {
                 ((FolderIcon) child).setTextVisible(false);
->>>>>>> parent of d42723e... CellLayout: Better Scaling
             }
 
             if (screen < 0) {
@@ -618,19 +608,10 @@ public class Workspace extends SmoothPagedView
                 y = mLauncher.getHotseat().getCellYFromOrder(screen);
             }
         } else {
-<<<<<<< HEAD
-            if (!mHideIconLabels) {
-                // Show titles if not in the hotseat
-                if (child instanceof FolderIcon) {
-                    ((FolderIcon) child).setTextVisible(true);
-                } else if (child instanceof BubbleTextView) {
-                    ((BubbleTextView) child).setTextVisible(true);
-                }
-=======
+
             // Show folder title if not in the hotseat
             if (child instanceof FolderIcon) {
                 ((FolderIcon) child).setTextVisible(true);
->>>>>>> parent of d42723e... CellLayout: Better Scaling
             }
 
             layout = (CellLayout) getChildAt(screen);
